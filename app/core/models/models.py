@@ -2,10 +2,12 @@
 
 import datetime
 
-from sqlalchemy import Column, DateTime, Integer, String, ForeignKey
+from sqlalchemy import Column, DateTime, Integer, String, ForeignKey, MetaData
 from sqlalchemy.orm import relationship
 
 from .base import Base
+
+metadata = MetaData()
 
 
 class Referrer(Base):
