@@ -1,3 +1,6 @@
 fastapi[all]
 sqlalchemy
 alembic
+dotenv
+psycopg2-binary
+black

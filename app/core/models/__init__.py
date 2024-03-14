@@ -3,11 +3,7 @@ __all__ = (
     "Base",
     "Referrer",
     "Referral",
-    # "DBHelper",
-    # "db_helper",
 )
 
-from .base import Base
+from .base_class import Base
 from .models import Referrer, Referral
-
-# from .db_helper import DBHelper, db_helper

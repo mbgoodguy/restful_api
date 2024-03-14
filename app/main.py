@@ -3,18 +3,22 @@ from fastapi import FastAPI
 
 from api_v1 import router as router_v1
 from app.core.config import settings
-
-# # lifespan_events - интерфейс для обработки создания и остановки приложения (что будет выполнено до и после)
-# @asynccontextmanager
-# async def lifespan(app: FastAPI):
-#     async with db_helper.engine.begin() as connection:
-#         await connection.run_sync(Base.metadata.create_all)
-#
-#     yield
+from app.core.database import engine
+from app.core.models import Base
 
 
-app = FastAPI()
-app.include_router(router=router_v1, prefix=settings.api_v1_prefix)
+def create_tables():
+    Base.metadata.create_all(bind=engine)
+
+
+def start_application():
+    app = FastAPI(title=settings.PROJECT_NAME, version=settings.PROJECT_VERSION)
+    app.include_router(router=router_v1, prefix="/api_v1")
+    create_tables()
+    return app
+
+
+app = start_application()
 
 
 @app.get("/")
